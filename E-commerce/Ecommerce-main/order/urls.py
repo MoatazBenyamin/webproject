@@ -8,4 +8,5 @@ urlpatterns = [
     path('chart/', views.index, name='dashboard-index'),
     path('pie-chart/', views.index2, name='dashboard-index2'),
     path('line-chart/', views.index3, name='dashboard-index3'),
+    path('RankingReport/', views.rankingindex , name= 'dashboard-rankingindex'),
 ]

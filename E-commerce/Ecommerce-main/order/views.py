@@ -69,3 +69,10 @@ def index3(request):
     'data': data,
     }
     return render(request, 'chart/lineChart.html', context)        
+
+def rankingindex(request):
+    data = Order.objects.all()
+    context = {
+        'data' : data,
+    }       
+    return render(request, 'chart/RankingReport.html', context)

@@ -32,7 +32,7 @@ STRIPE_SECRET_KEY = 'sk_test_51L4LqxJ73U9DidT72B3IW3a5F311z6QTsPSffxL0OsHnEwV3uf
 # Application definition
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'http://localhost:8080/'
-LOGOUT_REDIRECT_URL = 'http://127.0.0.1:8000/api/v1/login/'
+LOGOUT_REDIRECT_URL = 'http://localhost:8080/'
 
 INSTALLED_APPS = [
     'jazzmin',
