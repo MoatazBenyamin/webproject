@@ -6,12 +6,39 @@
         <h1 class="title">welcome :  {{ request.user.get_username }} </h1> 
     </div> 
     <hr>
-    <h2 class="subtitle">Account information  <a href="">Update Profile</a> </h2> 
+    {% if user.is_superuser %}
+    <h2 class="subtitle">admin Account information </h2> 
 
-    <p><strong>Name: </strong>{{ request.user.get_full_name }}</p> 
-    <p><strong>E-mail: </strong>{{ request.user.email }}</p>
-    <p><strong>Address: </strong>{{ request.user.userprofile.address }}</p>
-    <p><strong>Zip and place: </strong>{{ request.user.userprofile.zipcode }} {{ request.user.userprofile.place }}</p>
-    <p><strong>Phone: </strong>{{ request.user.userprofile.phone }}</p>
-    <a href="http://127.0.0.1:8000/api/v1/profile/update/" class="button is-danger">update profile</a> 
+            <p><strong>Name: </strong>{{ request.user.get_full_name }}</p> 
+            <p><strong>E-mail: </strong>{{ request.user.email }}</p>
+            <p><strong>Address: </strong>{{ request.user.userprofile.address }}</p>
+            <p><strong>Zip and place: </strong>{{ request.user.userprofile.zipcode }} {{ request.user.userprofile.place }}</p>
+            <p><strong>Phone: </strong>{{ request.user.userprofile.phone }}</p>
+
+            <a href="http://127.0.0.1:8000/api/v1/profile/update/" class="button is-success">update profile</a> 
+            <hr>
+            <div class="border p-3 shadow">
+            <h3>to suspend/add user</h3>
+            <a href="http://127.0.0.1:8000/admin/auth/user/" class="button is-success">users</a>  
+            <hr>
+            <h3>to check/add product</h3>
+            <a href="http://127.0.0.1:8000/admin/product/product/" class="button is-success">product</a> 
+            <hr>
+            <h3>to check/add Categorys</h3>
+            <a href="http://127.0.0.1:8000/admin/product/category/" class="button is-success">Categorys</a> 
+            <hr>
+            <h3>to check orders</h3>
+            <a href="http://127.0.0.1:8000/admin/order/order/" class="button is-success">check order</a>
+            </div>
+    {% else %}
+            <h2 class="subtitle">user Account information </h2> 
+
+            <p><strong>Name: </strong>{{ request.user.get_full_name }}</p> 
+            <p><strong>E-mail: </strong>{{ request.user.email }}</p>
+            <p><strong>Address: </strong>{{ request.user.userprofile.address }}</p>
+            <p><strong>Zip and place: </strong>{{ request.user.userprofile.zipcode }} {{ request.user.userprofile.place }}</p>
+            <p><strong>Phone: </strong>{{ request.user.userprofile.phone }}</p>
+            <a href="http://127.0.0.1:8000/api/v1/profile/update/" class="button is-danger">update profile</a> 
+    {% endif %}
+   
 {% endblock %}

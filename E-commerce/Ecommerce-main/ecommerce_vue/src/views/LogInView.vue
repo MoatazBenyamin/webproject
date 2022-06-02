@@ -17,6 +17,7 @@
                         <div class="control">
                             <input type="password" class="input" v-model="password">
                         </div>
+                       <router-link to="/forget-password" >forget my password</router-link>
                     </div>
 
                     <div class="notification is-danger" v-if="errors.length">

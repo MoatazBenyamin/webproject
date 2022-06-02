@@ -10,12 +10,18 @@ import LogIn from '../views/LogInView.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Checkout from '../views/Checkout.vue'
 import Success from '../views/Success.vue'
+import forgot from '../views/forgot.vue'
 
 const routes = [
   {
     path: '/',
     name: 'HomeView',
     component: HomeView
+  },
+  {
+    path: '/forget-password',
+    name: 'forgot',
+    component: forgot
   },
   {
     path: '/cart/success',
