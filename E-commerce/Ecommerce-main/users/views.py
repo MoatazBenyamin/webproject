@@ -1,8 +1,14 @@
+import urllib
+
+import json
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, UserprofileForm,ProfileUpdateForm,UserUpdateForm
+from .models import Video
 
 def signup(request):
     if request.method == 'POST':
@@ -10,15 +16,26 @@ def signup(request):
         userprofileform = UserprofileForm(request.POST)
 
         if form.is_valid() and userprofileform.is_valid():
-            user = form.save()
+            recaptcha_response = request.POST.get('g-recaptcha-response')
+            url = 'https://www.google.com/recaptcha/api/siteverify'
+            values = {
+                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
+                'response': recaptcha_response
+            }
+            data = urllib.parse.urlencode(values).encode()
+            req =  urllib.request.Request(url, data=data)
+            response = urllib.request.urlopen(req)
+            result = json.loads(response.read().decode())
+            if result['success']:
+                user = form.save()
+                userprofile = userprofileform.save(commit=False)
+                userprofile.user = user
+                userprofile.save()
+                login(request, user)
+                return redirect('http://localhost:8080/log-in')
+            else:
+                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
 
-            userprofile = userprofileform.save(commit=False)
-            userprofile.user = user
-            userprofile.save()
-
-            login(request, user)
-
-            return redirect('http://localhost:8080/log-in')
     else:
         form = SignUpForm()
         userprofileform = UserprofileForm()
@@ -52,3 +69,7 @@ def profile_update(request):
         'p_form': p_form,
     }
     return render(request, 'profile_update.html',context)
+
+def video(request):
+    video=Video.objects.all()
+    return render(request,"media.html",{"video":video})

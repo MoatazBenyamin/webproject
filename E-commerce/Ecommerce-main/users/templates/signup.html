@@ -11,7 +11,12 @@
             {{ form.as_p }}
 
             {{ userprofileform.as_p }}
-    
+            
+            {{ form.as_d }}
+            <hr>
+            <script src='https://www.google.com/recaptcha/api.js'></script>
+            <div class="g-recaptcha" data-sitekey="6LdkrzwgAAAAAOXpwrTq43pjeKGUysvk9OUiJQKY"></div>
+           
             <div class="field">
                 <div class="control">
                     <button class="button is-success">Sign up</button>

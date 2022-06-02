@@ -7,12 +7,15 @@ class Userprofile(models.Model):
     zipcode = models.CharField(max_length=255, blank=True, null=True)
     place = models.CharField(max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(default='default.png',
-                              upload_to='profile_images')
+    image = models.ImageField(default='default.png',upload_to='profile_images')
 
     def __str__(self):
         return '%s' % self.user.username
 
 User.userprofile = property(lambda u:Userprofile.objects.get_or_create(user=u)[0])
 
-
+class Video(models.Model):
+    caption=models.CharField(max_length=100)
+    video=models.FileField(upload_to="video/%y")
+    def __str__(self):
+        return self.caption

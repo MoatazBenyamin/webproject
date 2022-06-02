@@ -11,12 +11,18 @@ import MyAccount from '../views/MyAccount.vue'
 import Checkout from '../views/Checkout.vue'
 import Success from '../views/Success.vue'
 import forgot from '../views/forgot.vue'
+import Reset from '../views/rest.vue'
 
 const routes = [
   {
     path: '/',
     name: 'HomeView',
     component: HomeView
+  },
+  {
+    path: '/reset-password/:token',
+    name: 'Reset',
+    component: Reset
   },
   {
     path: '/forget-password',

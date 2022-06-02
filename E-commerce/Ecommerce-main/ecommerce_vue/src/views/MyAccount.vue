@@ -10,6 +10,7 @@
             <div class="column is-12">
                 <hr>
                 <a href="http://127.0.0.1:8000/api/v1/chart" class="button is-danger">charts</a>  <a href="http://127.0.0.1:8000/api/v1/myaccount" class="button is-danger">Profile</a>  <button @click="logout()" class="button is-danger"><a href="http://127.0.0.1:8000/api/v1/logout/" class="button is-danger">Log out</a></button> <a href="http://127.0.0.1:8000/api/v1/RankingReport/" class="button is-danger">Best 3 Watches</a>
+                <a href="http://127.0.0.1:8000/api/v1/review-watches/" class="button is-danger">reviews</a>
             </div>
 
             <div class="hero is-medium is-dark mb-6" >

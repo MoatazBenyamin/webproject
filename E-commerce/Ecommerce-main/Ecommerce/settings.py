@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from gettext import gettext
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +28,12 @@ SECRET_KEY = 'django-insecure--+oxn*j*#n*%+t_evzfld9$^(otijpmwadm+!n$#r-+rqz1jsp
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+SILENCED_SYSTEM_CHECKS = ['captcha.recaptcha_test_key_error']
+
+GOOGLE_RECAPTCHA_SITE_KEY ='6LdkrzwgAAAAAOXpwrTq43pjeKGUysvk9OUiJQKY'
+
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LdkrzwgAAAAANwzU6J7cOgXPmryma2zHm69Uch3'
 
 STRIPE_SECRET_KEY = 'sk_test_51L4LqxJ73U9DidT72B3IW3a5F311z6QTsPSffxL0OsHnEwV3ufISeUVcz4xjxQCXpu8Kmcu8YNtkih1B4BzTQtLC00EojEllnf'
 # Application definition
@@ -50,11 +57,15 @@ INSTALLED_APPS = [
 
     'product',
     'order',
+    'captcha',
     'users',
     'crispy_forms',
     "crispy_bootstrap5",
+
     
 ]
+
+
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -88,10 +99,15 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
 ]
+
+MEDIA_ROOT= os.path.join(BASE_DIR, 'media/')
+MEDIA_URL= "/media/"
+
 
 WSGI_APPLICATION = 'Ecommerce.wsgi.application'
 
@@ -137,12 +153,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-if DEBUG:
-    EMAIL_HOST = '127.0.0.1'
-    EMAIL_HOST_USER = ''
-    EMAIL_HOST_PASSWORD = ''
-    EMAIL_PORT = 1025
-    EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '8966cb701a7d56'
+EMAIL_HOST_PASSWORD = '295669533aa751'
+EMAIL_PORT = '2525'
     
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
