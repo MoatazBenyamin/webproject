@@ -31,7 +31,6 @@ def signup(request):
                 userprofile = userprofileform.save(commit=False)
                 userprofile.user = user
                 userprofile.save()
-                login(request, user)
                 return redirect('http://localhost:8080/log-in')
             else:
                 messages.error(request, 'Invalid reCAPTCHA. Please try again.')
